@@ -1,7 +1,5 @@
 package com.neolit.simpledeviceinfo;
 
-import static java.lang.System.getProperty;
-
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
@@ -20,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
         activityManager.getMemoryInfo(memoryInfo);
         long totalMemory = memoryInfo.totalMem/(1024*1024);
 
-        listView=(ListView)findViewById(R.id.listView);
-        arrayList = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+        listView= findViewById(R.id.listView);
+        arrayList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
 
         arrayList.add("Device Manufacturer: "+ Build.MANUFACTURER);
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         }
         arrayList.add("Android version: Android "+ Build.VERSION.RELEASE);
         arrayList.add("Security Patch: "+ (Build.VERSION.SECURITY_PATCH));
-        arrayList.add("SDK version: "+ String.valueOf(Build.VERSION.SDK_INT));
+        arrayList.add("SDK version: "+ Build.VERSION.SDK_INT);
         arrayList.add("Build Fingerprint: "+ Build.FINGERPRINT);
         arrayList.add("Build ID: "+ Build.ID);
         arrayList.add("Build Type: "+ Build.TYPE);
