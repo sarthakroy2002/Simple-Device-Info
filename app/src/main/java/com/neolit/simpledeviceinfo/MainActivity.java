@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView= findViewById(R.id.listView);
         arrayList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.lists, arrayList);
         listView.setAdapter(adapter);
 
         arrayList.add("Device Manufacturer: "+ Build.MANUFACTURER);
