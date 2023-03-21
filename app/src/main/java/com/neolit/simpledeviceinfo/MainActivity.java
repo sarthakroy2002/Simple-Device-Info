@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add("Device Model: "+ Build.MODEL);
         arrayList.add("Hardware: "+ Build.HARDWARE);
         if(!Objects.equals(Build.BOOTLOADER, "unknown")) {
-            arrayList.add("Board: " + Build.BOOTLOADER);
+            arrayList.add("Bootloader: " + Build.BOOTLOADER);
         }
         if(!Objects.equals(Build.BOARD, "unknown")) {
             arrayList.add("Board: " + Build.BOARD);
