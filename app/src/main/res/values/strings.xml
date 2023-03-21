@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Simple Device Info</string>
+    <string name="about">About</string>
 </resources>

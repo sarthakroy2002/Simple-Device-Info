@@ -2,11 +2,19 @@ package com.neolit.simpledeviceinfo;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -17,6 +25,39 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayList;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_about) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("It is a simple Android app created by Sarthak Roy to display few device information.");
+            builder.setTitle("About the App");
+            builder.setNegativeButton("Done", (DialogInterface.OnClickListener) (dialog, which) -> dialog.cancel());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Do you want to exit the app?");
+        builder.setTitle("Warning!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> finish());
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> dialog.cancel());
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +101,17 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add("RAM: "+ totalMemory + "MB");
 
         adapter.notifyDataSetChanged();
-    }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            int i;
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                i=i+1;
+                if (i>=5 && i%10==0) {
+                    Toast.makeText(MainActivity.this, "Don't be a fool to tap continuously!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        }
 }
