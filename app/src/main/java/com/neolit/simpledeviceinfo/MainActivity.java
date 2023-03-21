@@ -65,6 +65,18 @@ public class MainActivity extends AppCompatActivity {
         }else{
             arrayList.add("Project Treble: false");
         }
+        if (Objects.equals(getProperty("ro.virtual_ab.enabled"), "true") && Objects.equals(getProperty("ro.virtual_ab.retrofit"), "false")) {
+            arrayList.add("Virtual A/B Partition Scheme: true");
+        }
+        else if (Objects.equals(getProperty("ro.build.ab_update"), "true")) {
+            arrayList.add("A/B Partition Scheme: true");
+        }
+        else if (Objects.equals(getProperty("ro.virtual_ab.retrofit"), "true")) {
+            arrayList.add("Virtual A/B Retrofit Partition Scheme: true");
+        }
+        else{
+            arrayList.add("A-only Partition Scheme: true");
+        }
         arrayList.add("RAM: "+ totalMemory + "MB");
 
         adapter.notifyDataSetChanged();
