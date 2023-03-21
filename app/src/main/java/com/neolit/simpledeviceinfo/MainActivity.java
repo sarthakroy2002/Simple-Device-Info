@@ -1,5 +1,7 @@
 package com.neolit.simpledeviceinfo;
 
+import static java.lang.System.getProperty;
+
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add("Build Fingerprint: "+ Build.FINGERPRINT);
         arrayList.add("Build ID: "+ Build.ID);
         arrayList.add("Build Type: "+ Build.TYPE);
+        if (!Objects.equals(getProperty("ro.treble.enabled"), "true")) {
+            arrayList.add("Project Treble: true");
+        }else{
+            arrayList.add("Project Treble: false");
+        }
         arrayList.add("RAM: "+ totalMemory + "MB");
 
         adapter.notifyDataSetChanged();
