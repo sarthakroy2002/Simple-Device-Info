@@ -8,7 +8,6 @@ package com.neolit.simpledeviceinfo;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage("It is a simple Android app created by Sarthak Roy to display few device information.");
             builder.setTitle("About the App");
-            builder.setNegativeButton("Done", (DialogInterface.OnClickListener) (dialog, which) -> dialog.cancel());
+            builder.setNegativeButton("Done", (dialog, which) -> dialog.cancel());
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
             return true;
@@ -59,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("Do you want to exit the app?");
         builder.setTitle("Warning!");
         builder.setCancelable(false);
-        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> finish());
-        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> dialog.cancel());
+        builder.setPositiveButton("Yes", (dialog, which) -> finish());
+        builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
