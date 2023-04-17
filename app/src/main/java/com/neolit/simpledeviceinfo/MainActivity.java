@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2023 Sarthak Roy
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package com.neolit.simpledeviceinfo;
 
 import android.app.ActivityManager;

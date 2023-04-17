@@ -1,4 +1,9 @@
+<!--
+  Copyright (C) 2023 Sarthak Roy
+
+  SPDX-License-Identifier: Apache-2.0
+  -->
 <resources>
-    <string name="app_name">Simple Device Info</string>
-    <string name="about">About</string>
+    <string name="app_name" translatable="false">Simple Device Info</string>
+    <string name="about" translatable="false">About</string>
 </resources>
