@@ -8,6 +8,9 @@ package com.neolit.simpledeviceinfo;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -75,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
         activityManager.getMemoryInfo(memoryInfo);
         long totalMemory = memoryInfo.totalMem/(1024*1024);
 
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, ifilter);
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPct = level * 100 / (float)scale;
+
         listView= findViewById(R.id.listView);
         arrayList = new ArrayList<>();
         adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.lists, arrayList);
@@ -104,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add("Build ID: "+ Build.ID);
         arrayList.add("Build Type: "+ Build.TYPE);
         arrayList.add("RAM: "+ totalMemory + "MB");
-
+        arrayList.add("Battery Status: "+ (int)batteryPct + "%");
         adapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -119,4 +128,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         }
+
 }
