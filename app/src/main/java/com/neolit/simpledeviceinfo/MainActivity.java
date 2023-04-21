@@ -21,8 +21,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -39,12 +40,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_about) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this);
             builder.setMessage("It is a simple Android app created by Sarthak Roy to display few device information.");
             builder.setTitle("About the App");
             builder.setNegativeButton("Done", (dialog, which) -> dialog.cancel());
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            builder.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -52,14 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this);
         builder.setMessage("Do you want to exit the app?");
         builder.setTitle("Warning!");
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", (dialog, which) -> finish());
         builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        builder.show();
     }
 
     @Override
