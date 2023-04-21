@@ -4,7 +4,6 @@
   SPDX-License-Identifier: Apache-2.0
   -->
 <resources>
-    <!-- Base application theme. -->
     <style name="Theme.SimpleDeviceInfo" parent="Theme.Material3.DynamicColors.Light" >
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>

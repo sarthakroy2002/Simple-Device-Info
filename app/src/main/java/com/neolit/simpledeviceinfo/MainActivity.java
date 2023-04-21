@@ -18,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,10 +28,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
-    ListView listView;
-    ArrayAdapter<String> adapter;
-    ArrayList<String> arrayList;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,37 +79,39 @@ public class MainActivity extends AppCompatActivity {
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         float batteryPct = level * 100 / (float)scale;
 
-        listView= findViewById(R.id.listView);
-        arrayList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.lists, arrayList);
-        listView.setAdapter(adapter);
+        ListView listView= findViewById(R.id.listView);
+        ArrayList<SysView> arrayList = new ArrayList<>();
 
-        arrayList.add("Device Manufacturer: "+ Build.MANUFACTURER);
-        arrayList.add("Device Model: "+ Build.MODEL);
-        arrayList.add("Hardware: "+ Build.HARDWARE);
+        arrayList.add(new SysView("Device Manufacturer", String.valueOf(Build.MANUFACTURER)));
+        arrayList.add(new SysView("Device Model", String.valueOf(Build.MODEL)));
+        arrayList.add(new SysView("Hardware", Build.HARDWARE));
         if(!Objects.equals(Build.BOOTLOADER, "unknown")) {
-            arrayList.add("Bootloader: " + Build.BOOTLOADER);
+            arrayList.add(new SysView("Bootloader", Build.BOOTLOADER));
         }
         if(!Objects.equals(Build.BOARD, "unknown")) {
-            arrayList.add("Board: " + Build.BOARD);
+            arrayList.add(new SysView("Board", Build.BOARD));
         }
         if(Build.VERSION.SDK_INT >= 31) {
             if (!Objects.equals(Build.SOC_MANUFACTURER, "unknown")){
-                arrayList.add("SoC Manufacturer: " + Build.SOC_MANUFACTURER);
+                arrayList.add(new SysView("SoC Manufacturer", Build.SOC_MANUFACTURER));
             }
             if (!Objects.equals(Build.SOC_MODEL, "unknown")) {
-                arrayList.add("SoC Model: " + Build.SOC_MODEL);
+                arrayList.add(new SysView("SoC Model", Build.SOC_MODEL));
             }
         }
-        arrayList.add("Android version: Android "+ Build.VERSION.RELEASE);
-        arrayList.add("Security Patch: "+ (Build.VERSION.SECURITY_PATCH));
-        arrayList.add("SDK version: "+ Build.VERSION.SDK_INT);
-        arrayList.add("Build Fingerprint: "+ Build.FINGERPRINT);
-        arrayList.add("Build ID: "+ Build.ID);
-        arrayList.add("Build Type: "+ Build.TYPE);
-        arrayList.add("RAM: "+ totalMemory + "MB");
-        arrayList.add("Battery Status: "+ (int)batteryPct + "%");
-        adapter.notifyDataSetChanged();
+        arrayList.add(new SysView("Android version", Build.VERSION.RELEASE));
+        arrayList.add(new SysView("Security Patch", Build.VERSION.SECURITY_PATCH));
+        arrayList.add(new SysView("SDK version", String.valueOf(Build.VERSION.SDK_INT)));
+        arrayList.add(new SysView("Build Fingerprint", Build.FINGERPRINT));
+        arrayList.add(new SysView("Build ID", Build.ID));
+        arrayList.add(new SysView("Build Type", Build.TYPE));
+        arrayList.add(new SysView("RAM", totalMemory + "MB"));
+        arrayList.add(new SysView("Battery Status", (int)batteryPct + "%"));
+
+        SysViewAdapter sysViewAdapter = new SysViewAdapter(this, arrayList);
+        listView.setDivider(null);
+        listView.setSmoothScrollbarEnabled(true);
+        listView.setAdapter(sysViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {

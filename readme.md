@@ -1,6 +1,6 @@
 # Simple Device Info
 
-<img src="./screenshot/app.png"></img>
+<img src="./screenshot/screenshot.png"></img>
 
 This app is designed to provide you with few simple information about your Android device.
 
@@ -20,5 +20,6 @@ This app is designed to provide you with few simple information about your Andro
 - Build ID
 - Build Type
 - RAM
+- Battery Status
 
 # Copyright (C) 2023 Sarthak Roy
