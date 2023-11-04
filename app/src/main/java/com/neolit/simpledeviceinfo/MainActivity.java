@@ -10,6 +10,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ConfigurationInfo;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
         arrayList.add(new SysView("Device Manufacturer", String.valueOf(Build.MANUFACTURER)));
         arrayList.add(new SysView("Device Model", String.valueOf(Build.MODEL)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !Objects.equals(Build.SKU, "unknown")) {
+            arrayList.add(new SysView("SKU", Build.SKU));
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !Objects.equals(Build.ODM_SKU, "unknown")) {
+            arrayList.add(new SysView("ODM", Build.ODM_SKU));
+        }
         arrayList.add(new SysView("Hardware", Build.HARDWARE));
         if(!Objects.equals(Build.BOOTLOADER, "unknown")) {
             arrayList.add(new SysView("Bootloader", Build.BOOTLOADER));
@@ -104,8 +112,14 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(new SysView("Build Fingerprint", Build.FINGERPRINT));
         arrayList.add(new SysView("Build ID", Build.ID));
         arrayList.add(new SysView("Build Type", Build.TYPE));
+        arrayList.add(new SysView("Build Host", Build.HOST));
+        arrayList.add(new SysView("Build Time", String.valueOf(Build.TIME)));
+        arrayList.add(new SysView("Supported ABIs", Arrays.toString(Build.SUPPORTED_ABIS)));
         arrayList.add(new SysView("RAM", totalMemory + "MB"));
         arrayList.add(new SysView("Battery Status", (int)batteryPct + "%"));
+
+        final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
+        arrayList.add(new SysView("OpenGL ES Version", configurationInfo.getGlEsVersion()));
 
         SysViewAdapter sysViewAdapter = new SysViewAdapter(this, arrayList);
         listView.setDivider(null);
