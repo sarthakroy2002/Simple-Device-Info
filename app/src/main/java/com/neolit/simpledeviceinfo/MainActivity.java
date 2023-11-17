@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(new SysView("Build Host", Build.HOST));
         arrayList.add(new SysView("Build Time", String.valueOf(Build.TIME)));
         arrayList.add(new SysView("Supported ABIs", Arrays.toString(Build.SUPPORTED_ABIS)));
+        arrayList.add(new SysView("Kernel Version", System.getProperty("os.version")));
         arrayList.add(new SysView("RAM", totalMemory + "MB"));
         arrayList.add(new SysView("Battery Status", (int)batteryPct + "%"));
 
