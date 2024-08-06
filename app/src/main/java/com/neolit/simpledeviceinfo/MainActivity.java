@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         if(!Objects.equals(Build.BOARD, "unknown")) {
             arrayList.add(new SysView("Board", Build.BOARD));
         }
+        arrayList.add(new SysView("Product", Build.PRODUCT));
         if(Build.VERSION.SDK_INT >= 31) {
             if (!Objects.equals(Build.SOC_MANUFACTURER, "unknown")){
                 arrayList.add(new SysView("SoC Manufacturer", Build.SOC_MANUFACTURER));
@@ -117,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(new SysView("Supported ABIs", Arrays.toString(Build.SUPPORTED_ABIS)));
         arrayList.add(new SysView("Kernel Version", System.getProperty("os.version")));
         arrayList.add(new SysView("RAM", totalMemory + "MB"));
-        arrayList.add(new SysView("Battery Status", (int)batteryPct + "%"));
+        arrayList.add(new SysView("Battery Level", (int)batteryPct + "%"));
+        arrayList.add(new SysView("Battery Health", BatteryManager.EXTRA_HEALTH));
 
         final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
         arrayList.add(new SysView("OpenGL ES Version", configurationInfo.getGlEsVersion()));
